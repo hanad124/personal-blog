@@ -5,8 +5,14 @@ import ScrollIndicator from "@/components/ScrollIndicator";
 export default function Document() {
   return (
     <Html lang="en">
-      {/* <ScrollIndicator /> */}
-      <Head />
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;800&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <body className="mx-auto w-full  relative">
         <Main />
         <NextScript />
