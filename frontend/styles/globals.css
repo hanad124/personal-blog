@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  background-color: #0f172a;
+  position: relative;
+}
+
+.post-title {
+  color: #fff;
+  font-style: normal;
+  font-weight: 500;
+  margin-top: 1.2rem;
+}
+
+.post-subtitle,
+.post-date,
+.post-category {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.6);
+  margin-top: 12px;
+}
+
+.header_search {
+  border: none;
+  /* border-radius: .3rem; */
+  outline: 1.5px solid white;
+}
+.header_search input:focus {
+  outline: none;
+}
+
+.header_search:has(input:focus) {
+  outline: 2px solid rgba(186, 186, 186, 0.402);
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #fff;
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #0f172ad9;
+  border-radius: 14px;
+  border: 2px solid #0f172ad9;
+}
+
+.progress-wrapper {
+  position: sticky;
+  top: 82px;
+  left: 0;
+  height: 3px;
+  z-index: 100;
+  width: 100%;
+}
+
+.progress-bar {
+  height: 3px;
+  background-color: #3b6eb9;
+  transition: width 0.2s;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80%;
+  max-height: 80%;
+  background-color: white;
+  border-radius: 6px;
+  padding: 20px;
+  z-index: 2;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: gray;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.content {
+  overflow-y: auto;
+  max-height: calc(100% - 60px);
+  margin-top: 10px;
+}

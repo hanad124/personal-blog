@@ -1,0 +1,51 @@
+.post-preview {
+  // background: transparent;
+
+  .post-title {
+    color: #fff;
+    font-size: 19px;
+    // font-family: Patrick Hand;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 38px;
+    margin-top: 1.2rem;
+  }
+
+  .post-subtitle,
+  .post-date,
+  .post-category {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin-top: 8px;
+  }
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.6);
+  margin-top: 11px;
+}
+
+.header_search {
+  border: none;
+  border-radius: 0.3rem;
+  outline: 1px solid #2f353dc5;
+  background-color: #1e293b;
+
+  input:focus {
+    outline: none;
+  }
+
+  &:has(input:focus) {
+    outline: 2px solid rgba(186, 186, 186, 0.402);
+  }
+}
+
