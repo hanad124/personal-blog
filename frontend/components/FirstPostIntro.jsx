@@ -39,7 +39,7 @@ const FirstPost = ({ posts }) => {
                 <h1 className="post-title lg:text-[36px] font-bold mb-2 cursor-pointer hover:text-slate-400  ml-3 leading-10 ">
                   {firstPost.attributes.title}
                 </h1>
-                <p className="post-subtitle text-secondarycolor text-md my-4  ml-3 text-[18px] leading-6 text-[#94a3b8]">
+                <p className="post-subtitle text-secondarycolor my-4 font-extralight ml-3 text-[17px] leading-6 text-[#94a3b8]">
                   {firstPost.attributes.content.slice(0, 248)}
                   {firstPost.attributes.content.length > 248 && " ..."}
                 </p>

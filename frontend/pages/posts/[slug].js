@@ -14,7 +14,7 @@ import ScrollIndicator from "@/components/ScrollIndicator";
 
 const PostPage = ({ post }) => {
   const router = useRouter();
-  
+
   const dateString = post.attributes.date;
   const date = new Date(dateString);
   const postDate = format(date, "MMMM d, yyyy");
@@ -22,8 +22,8 @@ const PostPage = ({ post }) => {
   const body = marked.parse(post.attributes.content);
   const content = parse(body, {
     replace: (domNode) => {
-      if (domNode.name === "code") {
-        return <CodeBlock code={domNode.children[0].data} />;
+      if (domNode.name === "pre") {
+        return <CodeBlock code={domNode.children[0].children[0].data} />;
       }
     },
   });
@@ -93,12 +93,12 @@ const PostPage = ({ post }) => {
       </div>
       <div className="flex justify-center">
         <div className="max-[398px]:w-[22rem] m-auto break-words sm:mx-4">
-          <article className="prose md:prose-lg lg:prose-xl dark:prose-invert prose-img:rounded-xl prose-img:w-[30rem] prose-img:h-[16rem] prose-a:text-blue-400 prose-code:text-[#23ba9e] prose-pre:text-white">
+          <article className="prose md:prose-lg lg:prose-xl dark:prose-invert prose-img:rounded-xl prose-img:w-[30rem] prose-img:h-[16rem] prose-a:text-blue-400">
             {content}
           </article>
         </div>
       </div>
-      <di className="flex items-center gap-5 text-center justify-center my-11">
+      <div className="flex items-center gap-5 text-center justify-center my-11">
         <p className="text-white">Tags: </p>
         {post.attributes.tags.tags.map((tag) => {
           return (
@@ -109,7 +109,7 @@ const PostPage = ({ post }) => {
             </>
           );
         })}
-      </di>
+      </div>
     </div>
   );
 };

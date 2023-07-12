@@ -50,7 +50,7 @@ const Header = ({ onSearch, handleMdlOpen }) => {
           <BiUpArrowAlt className="to-top-arrow text-lg font-lg" />
         </button>
       )}
-      <div className="header sticky top-0 mx-0 left-0 w-full backdrop-blur-2xl bg-slate-700/20 border-b-2 border-slate-700  z-10 ">
+      <div className="header sticky top-0 mx-0 left-0 w-full backdrop-blur-2xl bg-slate-700/20 border-b-2 border-slate-700  z-50 ">
         <Popover className="container mx-auto flex   items-center sm:justify-between  px-6 py-1 h-20">
           <div className="flex items-center gap-3">
             <div className="bg-slate-700 font-bold text-xl w-7 h-7 rounded-md flex justify-center items-center text-white">

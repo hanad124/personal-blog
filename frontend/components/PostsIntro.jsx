@@ -9,22 +9,19 @@ import parse from "html-react-parser";
 import { format } from "date-fns";
 
 const PostPreview = ({ posts }) => {
-  const firstPost = posts[0];
-
   const selectedArr = [];
   selectedArr.push(...posts.slice(1, 3));
 
-
   return (
     <SkeletonTheme baseColor="#202020" highlightColor="#444">
-      <div className="basis-1/4 relative z-0 flex flex-col gap-x-[10rem]">
+      <div className="basis-1/4 relative z-0 flex flex-col ">
         {selectedArr.length > 0 ? (
           selectedArr.map((post) => {
             let date = new Date(post.attributes.date);
             let postDate = format(date, "MMMM d, yyyy");
             let readingTimeText = readingTime(post.attributes.content).text;
             return (
-              <div className="lg:w-[426px]  lg:h-[26rem]">
+              <div className="lg:w-[426px]  lg:h-[23rem] ">
                 <div className="">
                   {post.attributes.thumbnail.data.map((thumb) => {
                     return (
