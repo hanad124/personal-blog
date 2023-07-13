@@ -40,6 +40,10 @@
   outline: 1px solid #2f353dc5;
   background-color: #1e293b;
 
+  &:hover {
+    background-color: #1e293b8a;
+  }
+
   input:focus {
     outline: none;
   }
@@ -49,3 +53,10 @@
   }
 }
 
+.allPosts {
+  border-top: 1px solid #1e293bc8;
+}
+
+.footer {
+  border-top: 1px solid #1e293bc8;
+}

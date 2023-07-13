@@ -93,7 +93,7 @@ const PostPage = ({ post }) => {
       </div>
       <div className="flex justify-center">
         <div className="max-[398px]:w-[22rem] m-auto break-words sm:mx-4">
-          <article className="prose md:prose-lg lg:prose-xl dark:prose-invert prose-img:rounded-xl prose-img:w-[30rem] prose-img:h-[16rem] prose-a:text-blue-400">
+          <article className="prose md:prose-lg lg:prose-xl dark:prose-invert prose-img:rounded-xl prose-img:w-[30rem] prose-img:h-[16rem] prose-a:text-blue-400 prose-code:text-[#23ba9e] prose-code:bg-slate-800 prose-code:p-1 prose-code:rounded-md" >
             {content}
           </article>
         </div>

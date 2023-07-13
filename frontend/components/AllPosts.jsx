@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PostsIntro from "./PostsIntro";
 import FirstPostIntro from "./FirstPostIntro";
 import LatestPosts from "./LatestPosts";
+import variables from "../styles/variables.module.scss";
 
 const AllPosts = ({ posts }) => {
   useEffect(() => {}, [posts]);
@@ -14,7 +15,7 @@ const AllPosts = ({ posts }) => {
     const postDate = new Date(post.attributes.date).getTime();
     const today = new Date().getTime();
     const oneWeekAgo = today - 7 * 24 * 60 * 60 * 1000; // date one week ago
-    return postDate > oneWeekAgo; // filter posts created in the last week
+    return postDate ; // filter posts created in the last week
   });
 
   const renderPostsIntro = () => {
@@ -35,7 +36,9 @@ const AllPosts = ({ posts }) => {
         <div className="">{renderFirstPostIntro()}</div>
         <div className="">{renderPostsIntro()}</div>
       </div>
-      <div className="mt-20 border-t-slate-500 border-t-2 ">
+      <div
+        className={`${variables.allPosts} mt-20`}
+      >
         {renderLatestPosts()}
       </div>
     </div>

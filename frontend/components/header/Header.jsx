@@ -154,17 +154,12 @@ const Header = ({ onSearch, handleMdlOpen }) => {
               className={`${variables.header_search}  flex text-white items-center gap-2  rounded  px-2 py-1`}
             >
               <FiSearch onClick={handleSearch} />
-              <input
-                type="text"
-                value={searchTerm}
-                className="bg-transparent px-3 cursor-pointer"
-                placeholder="Quick search..."
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  onSearch(e.target.value);
-                }}
+              <div
                 onClick={handleModal}
-              />
+                className="bg-transparent px-8 cursor-pointer text-[#687383] text-sm"
+              >
+                Quick search...
+              </div>
             </div>
           </div>
         </Popover>

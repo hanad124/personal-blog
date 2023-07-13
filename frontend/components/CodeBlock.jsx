@@ -37,6 +37,9 @@ const CodeBlock = ({ code, language }) => {
     el.select();
     document.execCommand("copy");
     document.body.removeChild(el);
+
+
+    
   };
 
   return (
