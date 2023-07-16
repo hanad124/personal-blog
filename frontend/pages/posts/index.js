@@ -1,87 +1,146 @@
-import Link from "next/link";
-// import { PostMetadata } from "./PostMetadata";
-import Image from "next/image";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import axios from "axios";
+import { useRef } from "react";
 import Header from "@/components/header/Header";
+import PostPreview from "@/components/PostsIntro";
+import variables from "../../styles/variables.module.scss";
+import Link from "next/link";
+import { FiSearch } from "react-icons/fi";
+import AllPosts from "@/components/AllPosts";
+import SearchModal from "@/components/SearchModal";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import readingTime from "reading-time";
+import { format } from "date-fns";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
-const PostsPage = ({ posts }) => {
-  // console.log("POST: ", post);
+export default function Posts({ posts }) {
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [loading, setLoading] = useState(true);
+  const searchInputRef = useRef(null);
+
+  const router = useRouter();
+
+  function clearUrl() {
+    router.push("/", undefined, { shallow: true, replace: true });
+  }
+
+  const handleSearch = async (e) => {
+    setSearchValue(e.target.value);
+    if (!e.target.value) {
+      setFilteredPosts([]);
+      return;
+    }
+    setLoading(true);
+    const response = await axios.get(
+      `http://127.0.0.1:1337/api/posts?filters[content][$contains]=${e.target.value}&filters[title][$contains]=${e.target.value}&populate=*`
+    );
+    const data = response.data;
+    setFilteredPosts(data.data);
+    setLoading(false);
+  };
+
+  const handleModalOpen = (mld) => {
+    if (mld) {
+      setModalOpen(true);
+
+      if (searchInputRef.current !== null) {
+        searchInputRef.current.focus();
+      }
+    }
+  };
+
   return (
     <>
-      <Header />
-      <div className="flex flex-wrap justify-center">
-        {posts.map((post) => {
-          return (
-            <div className="post-preview max-w-lg mx-auto relative z-0 h-[426px] max-h-[426px] w-[19rem] rounded-lg mt-0 flex flex-col border border-slate-700  items-end ">
-              <div className="relative h-52 w-full">
-                {post.attributes.thumbnail.data.map((thumb) => {
-                  return (
-                    <img
-                      src={"http://localhost:1337" + thumb.attributes.url}
-                      className="rounded-t-[10px] border-b-2 border-slate-700 h-[195px] max-h-[195px] relative z-10 w-full "
-                    />
-                  );
-                })}
+      <Header onSearch={handleSearch} handleMdlOpen={handleModalOpen} />
+
+      <div>
+        <SearchModal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+          <input
+            type="text"
+            ref={searchInputRef}
+            placeholder="Start typing to search"
+            onChange={handleSearch}
+            className="w-full border border-[#1E293B] py-3 px-4 pl-10 focus:outline-none focus:border-[#6c63ff] bg-transparent rounded-3xl text-[#fff] placeholder:text-slate-400 font-medium"
+          />
+
+          <div className="max:h-[200px] overflow-y-scroll">
+            {loading ? (
+              <div className="flex flex-col mt-7 ml-5">
+                <SkeletonTheme baseColor="#1b2342" highlightColor="#444">
+                  <Skeleton width={900} height={20} count={1} />
+                  <Skeleton width={600} height={20} count={1} />
+                  <Skeleton width={620} height={20} count={1} />
+                  <br />
+                </SkeletonTheme>
               </div>
-              <div className=" flex flex-col">
-                <div>
-                  <div className="flex gap-4 text-center text-[12px mt-3  ml-2">
-                    <p className="post-category uppercase cursor-pointer text-secondarycolor text-xs">
-                      {post.attributes.category || <Skeleton />}
-                    </p>
-                    <div className="dot text-secondarycolor"></div>
-                    <p className="post-date text-secondarycolor text-sm">
-                      {post.attributes.date || <Skeleton />}
-                    </p>
-                  </div>
-                  <Link href={`/posts/${post.slug}`}>
-                    <h1 className="post-title text-xl font-bold mb-2 cursor-pointer hover:underline  ml-2">
-                      {post.attributes.title.slice(0, 28)}
-                      {post.attributes.title.length > 28 && " ..."}
-                    </h1>
-                  </Link>
-                  <p className="post-subtitle text-secondarycolor text-md mb-4  ml-2">
-                    {post.attributes.subtitle.slice(0, 68)}
-                    {post.attributes.subtitle.length > 68 && " ..."}
+            ) : (
+              <>
+                {filteredPosts.length > 0 ? (
+                  filteredPosts.map((post) => {
+                    let date = new Date(post.attributes.date);
+                    let postDate = format(date, "MMMM d, yyyy");
+                    let readingTimeText = readingTime(
+                      post.attributes.content
+                    ).text;
+                    return (
+                      <Link
+                        href={`/posts/${post.attributes.slug}`}
+                        onClick={clearUrl}
+                      >
+                        <div className="">
+                          <div
+                            className={`${variables.search_posts} mt-7 ml-5 flex justify-between border-b border-[#3f475d6d] py-2`}
+                          >
+                            <div className="flex flex-col gap-2">
+                              <h1 className="text-white text-2xl font-bold">
+                                {post.attributes.title}
+                              </h1>
+                              <div className="flex items-center gap-4 text-[#94a3b8] font-medium">
+                                <p>{postDate}</p>
+                                <p>{readingTimeText}</p>
+                              </div>
+                              <p key={post.id} className="text-[#94a3b8]">
+                                {post.attributes.author}
+                              </p>
+                            </div>
+                            {post.attributes.thumbnail.data.map((thumb) => {
+                              console.log(
+                                "http://localhost:1337" + thumb.attributes.url
+                              );
+                              return (
+                                <img
+                                  src={
+                                    "http://localhost:1337" +
+                                    thumb.attributes.url
+                                  }
+                                  alt="image desc"
+                                  className="w-[14rem] h-[7rem] rounded-md"
+                                />
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </Link>
+                    );
+                  })
+                ) : (
+                  <p className="text-center text-white mt-[3rem]">
+                    No posts found.
                   </p>
-                  <div className="flex gap-4 items-end mb-4 ml-2">
-                    {post.attributes.author_image.data.map((avator) => {
-                      return (
-                        <img
-                          src={
-                            "http://127.0.0.1:1337" + avator.attributes.url || (
-                              <Skeleton />
-                            )
-                          }
-                          alt="Description of image"
-                          width={100}
-                          height={100}
-                          className="border-solid	border-2 border-slate-400 rounded-full w-10 h-10 cursor-pointer"
-                        />
-                      );
-                    })}
-                    <div className="">
-                      <p className="text-white">
-                        {post.attributes.author || <Skeleton />}
-                      </p>
-                      <p className="text-slate-400">
-                        {post.attributes.author_career || <Skeleton />}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+                )}
+              </>
+            )}
+          </div>
+        </SearchModal>
+      </div>
+      <div className="flex flex-wrap gap-y-4 justify-center mt-[4rem]">
+        <AllPosts posts={posts} key={posts.key} />
       </div>
     </>
   );
-};
-
-export default PostsPage;
+}
 
 export async function getStaticProps() {
   const response = await axios.get(

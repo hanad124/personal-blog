@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import Header from "@/components/header/Header";
 import { marked } from "marked";
@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { format } from "date-fns";
 import Link from "next/link";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import { HiTag } from "react-icons/hi";
 
 const PostPage = ({ post }) => {
   const router = useRouter();
@@ -93,13 +94,16 @@ const PostPage = ({ post }) => {
       </div>
       <div className="flex justify-center">
         <div className="max-[398px]:w-[22rem] m-auto break-words sm:mx-4">
-          <article className="prose md:prose-lg lg:prose-xl dark:prose-invert prose-img:rounded-xl prose-img:w-[30rem] prose-img:h-[16rem] prose-a:text-blue-400 prose-code:text-[#23ba9e] prose-code:bg-slate-800 prose-code:p-1 prose-code:rounded-md" >
+          <article className="prose md:prose-lg lg:prose-xl dark:prose-invert prose-img:rounded-xl prose-img:w-[30rem] prose-img:h-[16rem] prose-a:text-blue-400 prose-code:text-[#23ba9e] prose-code:bg-slate-800 prose-code:p-1 prose-code:rounded-md">
             {content}
           </article>
         </div>
       </div>
       <div className="flex items-center gap-5 text-center justify-center my-11">
-        <p className="text-white">Tags: </p>
+        <div className=" flex gap-2 items-center text-[#23ba9e]">
+          <HiTag />
+          <p>Tags:</p>
+        </div>
         {post.attributes.tags.tags.map((tag) => {
           return (
             <>

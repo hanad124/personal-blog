@@ -31,8 +31,8 @@ const AllPosts = ({ posts }) => {
   };
 
   return (
-    <div className=" w-fulllg:mx-52">
-      <div className="flex flex-row gap-8">
+    <div className=" ">
+      <div className="flex flex-row gap-14">
         <div className="">{renderFirstPostIntro()}</div>
         <div className="">{renderPostsIntro()}</div>
       </div>

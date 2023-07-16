@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import Header from "@/components/header/Header";
 import PostPreview from "@/components/PostsIntro";
 import variables from "../styles/variables.module.scss";
@@ -7,7 +7,6 @@ import Link from "next/link";
 import { FiSearch } from "react-icons/fi";
 import AllPosts from "@/components/AllPosts";
 import SearchModal from "@/components/SearchModal";
-import { useState } from "react";
 import { useRouter } from "next/router";
 import readingTime from "reading-time";
 import { format } from "date-fns";
@@ -50,6 +49,23 @@ export default function Posts({ posts }) {
       }
     }
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchInputRef.current &&
+        !searchInputRef.current.contains(event.target)
+      ) {
+        setModalOpen(false);
+      }
+    };
+
+    window.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
