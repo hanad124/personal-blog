@@ -78,10 +78,10 @@ export default function Posts({ posts }) {
             ref={searchInputRef}
             placeholder="Start typing to search"
             onChange={handleSearch}
-            className="w-full border border-[#1E293B] py-3 px-4 pl-10 focus:outline-none focus:border-[#6c63ff] bg-transparent rounded-3xl text-[#fff] placeholder:text-slate-400 font-medium"
+            className="w-full sticky top-0 left-0 backdrop-blur-2xl bg-slate-700/20 border border-[#1E293B] py-3 px-4 pl-10 focus:outline-none focus:border-[#6c63ff] rounded-3xl text-[#fff] placeholder:text-slate-400 font-medium"
           />
 
-          <div className="max:h-[200px] overflow-y-scroll">
+          <div className="">
             {loading ? (
               <div className="flex flex-col mt-7 ml-5">
                 <SkeletonTheme baseColor="#1b2342" highlightColor="#444">

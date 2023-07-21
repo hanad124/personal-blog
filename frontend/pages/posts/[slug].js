@@ -107,7 +107,7 @@ const PostPage = ({ post }) => {
         {post.attributes.tags.tags.map((tag) => {
           return (
             <>
-              <p className="text-white bg-[#1e293b] hover:bg-slate-700 px-3 py-2 rounded-md cursor-pointer">
+              <p className="text-white  border border-[#1e293b] hover:border-slate-700 hover:text-[#23ba9e] hover:scale-105 hover:transition-transform px-3 py-2 rounded-md cursor-pointer">
                 {tag.name}
               </p>
             </>
