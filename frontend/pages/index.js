@@ -17,7 +17,6 @@ export default function Posts({ posts }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [loading, setLoading] = useState(true);
-  const searchInputRef = useRef(null);
 
   const router = useRouter();
 
@@ -43,18 +42,16 @@ export default function Posts({ posts }) {
   const handleModalOpen = (mld) => {
     if (mld) {
       setModalOpen(true);
-
-      if (searchInputRef.current !== null) {
-        searchInputRef.current.focus();
-      }
     }
   };
+
+  const searchModalRef = useRef();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        searchInputRef.current &&
-        !searchInputRef.current.contains(event.target)
+        searchModalRef.current &&
+        !searchModalRef.current.contains(event.target)
       ) {
         setModalOpen(false);
       }
@@ -65,17 +62,20 @@ export default function Posts({ posts }) {
     return () => {
       window.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [searchModalRef]);
 
   return (
     <>
       <Header onSearch={handleSearch} handleMdlOpen={handleModalOpen} />
 
-      <div>
-        <SearchModal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+      <SearchModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        ref={searchModalRef}
+      >
+        <div ref={searchModalRef}>
           <input
             type="text"
-            ref={searchInputRef}
             placeholder="Start typing to search"
             onChange={handleSearch}
             className="w-full sticky top-0 left-0 backdrop-blur-2xl bg-slate-700/20 border border-[#1E293B] py-3 px-4 pl-10 focus:outline-none focus:border-[#6c63ff] rounded-3xl text-[#fff] placeholder:text-slate-400 font-medium"
@@ -149,8 +149,8 @@ export default function Posts({ posts }) {
               </>
             )}
           </div>
-        </SearchModal>
-      </div>
+        </div>
+      </SearchModal>
       <div className="flex flex-wrap gap-y-4 justify-center mt-[4rem]">
         <AllPosts posts={posts} key={posts.key} />
       </div>

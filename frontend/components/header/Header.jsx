@@ -13,6 +13,7 @@ const Header = ({ onSearch, handleMdlOpen }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  
 
   const handleSearch = () => {
     onSearch(searchTerm);
@@ -44,7 +45,7 @@ const Header = ({ onSearch, handleMdlOpen }) => {
     <>
       {isVisible && (
         <button
-          className="fixed bottom-10 right-10 backdrop-blur-2xl bg-slate-700/20 text-white rounded-full p-3 text-lg shadow-lg focus:outline-none border border-slate-700 hover:bg-gray-700 z-50"
+          className="fixed bottom-10 right-10 backdrop-blur-2xl bg-slate-700/20 text-white rounded-full p-3 text-lg shadow-lg focus:outline-none border border-slate-700 hover:bg-gray-700 z-50 hover:shadow-xl hover:shadow-[#23ba9e]"
           onClick={handleClick}
         >
           <BiUpArrowAlt className="to-top-arrow text-lg font-lg" />

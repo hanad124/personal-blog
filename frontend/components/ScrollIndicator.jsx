@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "../styles/indicator.module.css";
 
 const ScrollIndicator = () => {
   const [scrollTop, setScrollTop] = useState(0);

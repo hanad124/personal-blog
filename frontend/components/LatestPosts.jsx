@@ -16,7 +16,7 @@ const POSTS_PER_PAGE = 6;
 const LatestPosts = ({ posts }) => {
   const [numPosts, setNumPosts] = useState(POSTS_PER_PAGE);
   const selectedArr = [];
-  selectedArr.push(...posts.slice(3, numPosts));
+  selectedArr.push(...posts.slice(3));
 
   const pageVariants = {
     initial: {
@@ -90,7 +90,7 @@ const LatestPosts = ({ posts }) => {
                       })}
                     </div>
                     <div className="ml-2">
-                      <Link href={`/posts/${post.attributes.slug}`}>
+                      <Link href={`posts/${post.attributes.slug}`}>
                         <div className="flex justify-between items-center mt-5">
                           <div className="flex gap-2">
                             {post.attributes.tags.tags
@@ -99,6 +99,7 @@ const LatestPosts = ({ posts }) => {
                                 return (
                                   <>
                                     <p className="text-sm text-slate-500 hover:text-[#23ba9e]">
+                                      #
                                       {tag.name.slice(0, 15) +
                                         (tag.name.length > 15 ? " ..." : "")}
                                     </p>
@@ -125,8 +126,8 @@ const LatestPosts = ({ posts }) => {
                           whileHover={{ color: "#61dafb" }}
                         >
                           {post.attributes.title ? (
-                            post.attributes.title.slice(0, 91) +
-                            (post.attributes.title.length > 91 ? " ..." : "")
+                            post.attributes.title.slice(0, 51) +
+                            (post.attributes.title.length > 51 ? " ..." : "")
                           ) : (
                             <Skeleton width={200} />
                           )}
@@ -186,7 +187,9 @@ const LatestPosts = ({ posts }) => {
                           </div>
                         </div>
                         <button className="text-white  border border-[#1e293b] hover:border-slate-700 hover:text-[#23ba9e] hover:scale-105 hover:transition-transform px-3 py-2 rounded-md cursor-pointer">
-                          <Link href={`posts/${post.attributes.slug}`}>Read more</Link>
+                          <Link href={`posts/${post.attributes.slug}`}>
+                            Read more
+                          </Link>
                         </button>
                       </div>
                     </div>
@@ -199,18 +202,6 @@ const LatestPosts = ({ posts }) => {
           <Skeleton height={400} />
         )}
       </motion.div>
-      <div className="flex justify-center">
-        {numPosts < posts.length && (
-          <motion.button
-            className="bg-slate-800 w-40 flex items-center gap-2 hover:bg-slate-700 text-white font-md py-2 px-4 rounded mt-6"
-            onClick={() => setNumPosts(numPosts + 3)}
-            whileHover={{ scale: 1.05 }}
-          >
-            <HiOutlineRefresh className="text-xl" />
-            <p>Load More</p>
-          </motion.button>
-        )}
-      </div>
     </SkeletonTheme>
   );
 };
