@@ -12,6 +12,10 @@ import { format } from "date-fns";
 import Link from "next/link";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import { HiTag } from "react-icons/hi";
+import Markdown from "markdown-to-jsx";
+// import { Code } from "bright";
+
+// Code.theme = "dracula";
 
 const PostPage = ({ post }) => {
   const router = useRouter();
@@ -27,6 +31,9 @@ const PostPage = ({ post }) => {
         return <CodeBlock code={domNode.children[0].children[0].data} />;
       }
     },
+  });
+  post.attributes.tags.tags.map((tag) => {
+    console.log(tag);
   });
 
   const readingTimeText = post.readingTime.text;
@@ -59,7 +66,7 @@ const PostPage = ({ post }) => {
           <div className="dot"></div>
           <p className="text-[#d1d5db]">{postDate}</p>
         </div>
-        <p className="text-[#d1d5db] text-[2rem] mx-3 lg:mx-[30rem] md:mx-[7rem] flex justify-center font-medium">
+        <p className="text-[#d1d5db] text-[2rem] mx-3 lg:mx-[15rem] md:mx-[7rem] flex justify-center font-medium">
           {post.attributes.title}
         </p>
         <div className="flex justify-center mt-6">
@@ -81,21 +88,22 @@ const PostPage = ({ post }) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center mt-10 mx-3 lg:mx-[29rem] md:mx-[5rem] [1280]:mx-w-full">
+      <div className="flex justify-center mt-10 mx-3 lg:mx-[14rem] md:mx-[5rem] [1280]:mx-w-full">
         {post.attributes.thumbnail.data.map((thumb) => {
           return (
             <img
               key={thumb.id}
               src={"http://localhost:1337" + thumb.attributes.url}
-              className="rounded-md mb-11 text-center w-full mx-auto max:h-[38rem] h-auto lg:h-[35rem]"
+              className="rounded-md mb-11 text-center w-full mx-auto h-auto max:h-[2rem]"
             />
           );
         })}
       </div>
       <div className="flex justify-center">
         <div className="max-[398px]:w-[22rem] m-auto break-words sm:mx-4">
-          <article className="prose md:prose-lg lg:prose-xl dark:prose-invert prose-img:rounded-xl prose-img:w-[30rem] prose-img:h-[16rem] prose-a:text-blue-400 prose-code:text-[#23ba9e] prose-code:bg-slate-800 prose-code:p-1 prose-code:rounded-md">
+          <article className="prose prose-slate md:prose-lg lg:prose-xl prose-p:text-slate-200 prose-headings:text-slate-100 prose-img:rounded-xl prose-img:w-[30rem] prose-img:h-[16rem] prose-a:text-blue-400 prose-code:text-[#23ba9e] prose-code:bg-slate-800 prose-code:p-1 prose-code:rounded-md">
             {content}
+            {/* <Markdown>{post.attributes.content}</Markdown> */}
           </article>
         </div>
       </div>
@@ -108,7 +116,7 @@ const PostPage = ({ post }) => {
           return (
             <>
               <p className="text-white  border border-[#1e293b] hover:border-slate-700 hover:text-[#23ba9e] hover:scale-105 hover:transition-transform px-3 py-2 rounded-md cursor-pointer">
-                {tag.name}
+                {tag}
               </p>
             </>
           );
