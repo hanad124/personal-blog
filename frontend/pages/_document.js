@@ -13,6 +13,7 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;800&display=swap"
           rel="stylesheet"
         />
+        <title>Faruq Blog</title>
       </Head>
       <body className="mx-auto w-full  relative">
         <Main />

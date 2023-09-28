@@ -14,7 +14,7 @@ const PostPreview = ({ posts }) => {
 
   return (
     <SkeletonTheme baseColor="#202020" highlightColor="#444">
-      <div className="basis-1/4 relative z-0 flex flex-col ">
+      <div className=" relative z-0 flex flex-col ">
         {selectedArr.length > 0 ? (
           selectedArr.map((post) => {
             let date = new Date(post.attributes.date);

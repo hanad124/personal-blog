@@ -19,16 +19,16 @@ const FirstPost = ({ posts }) => {
 
   return (
     <SkeletonTheme baseColor="#202020" highlightColor="#444">
-      <div className="basis-1/2 relative z-0">
+      <div className="flex-shrink relative z-0">
         {Object.keys(firstPost).length > 0 ? (
-          <div className="lg:w-[885px]  lg:h-[46rem]">
+          <div className="flex-1  md:h-[40rem]">
             <div className="">
               {firstPost.attributes.thumbnail.data.map((thumb) => {
                 return (
                   <Link href={`/posts/${firstPost.attributes.slug}`}>
                     <img
                       src={"http://localhost:1337" + thumb.attributes.url}
-                      className="rounded-t-[10px]  h-[495px] max-h-[495px] relative z-10 w-full border rounded-lg border-slate-800  hover:transform hover:opacity-80 transition duration-300"
+                      className="rounded-t-[10px]  h-[395px] max-h-[395px] relative z-10 w-full border rounded-lg border-slate-800  hover:transform hover:opacity-80 transition duration-300"
                     />
                   </Link>
                 );
@@ -36,12 +36,12 @@ const FirstPost = ({ posts }) => {
             </div>
             <div className="">
               <Link href={`/posts/${firstPost.attributes.slug}`}>
-                <h1 className="post-title lg:text-[36px] font-bold mb-2 cursor-pointer hover:text-slate-400  ml-3 leading-10 ">
+                <h1 className="post-title lg:text-[36px] font-bold mb-2 cursor-pointer hover:text-slate-400  ml-3 leading-relaxed ">
                   {firstPost.attributes.title}
                 </h1>
                 <p className="post-subtitle text-secondarycolor my-4 font-extralight ml-3 text-[17px] leading-6 text-[#94a3b8] ">
-                  {firstPost.attributes.content.slice(0, 248)}
-                  {firstPost.attributes.content.length > 248 && " ..."}
+                  {firstPost.attributes.content.slice(0, 166)}
+                  {firstPost.attributes.content.length > 166 && " ..."}
                 </p>
               </Link>
             </div>

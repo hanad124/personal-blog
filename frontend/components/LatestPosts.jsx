@@ -55,7 +55,7 @@ const LatestPosts = ({ posts }) => {
   return (
     <SkeletonTheme baseColor="#202020" highlightColor="#444">
       <motion.div
-        className=" z-0 py-10 lg:w-[110rem] flex flex-wrap gap-10 relative"
+        className=" z-0 py-10  flex flex-wrap gap-10 relative"
         initial="initial"
         animate="in"
         exit="out"
